@@ -12,4 +12,9 @@ public class Demo {
 		return a+b;
 		
 	}
+	@GetMapping("/hello")
+	public String get() {
+		return "hello amit";
+		
+	}
 }
