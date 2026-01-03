@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'M3'
+    }
+
     environment {
         GITHUB_TOKEN = credentials('Atul')
     }
@@ -9,14 +13,14 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo "Running build..."
+                echo "Running Maven build on Windows..."
                 bat 'mvn clean install -B'
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running tests..."
+                echo "Running Maven tests..."
                 bat 'mvn test'
             }
         }
@@ -24,10 +28,10 @@ pipeline {
 
     post {
         success {
-            echo "Build succeeded!"
+            echo "✅ Build succeeded!"
         }
         failure {
-            echo "Build failed!"
+            echo "❌ Build failed!"
         }
     }
 }
